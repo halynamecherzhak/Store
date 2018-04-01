@@ -10,23 +10,24 @@ namespace Characteristic;
 
 class Characteristic{
 
-    public static $characteristic = array ('tulip' => 'Imported from Holland,available amount: 50',
-        'orchid'=>'Imported from America,available amount: 25',
-        'chocolate'=>'Imported from Switzerland,available amount: 15'
-        );
+   private $characteristicArray;
 
-    public static function getCharacteristic()
+    public function __construct($characteristicArray)
     {
-        return self::$characteristic;
+        $this -> characteristicArray = $characteristicArray;
     }
-
-     public static function printCharacteristic()
-     {
-         foreach(self::getCharacteristic() as $key => $value)
-         {
-             echo "$key = $value <br />";
-         }
-     }
+    /**
+     * @return mixed
+     */
+    public function getCharacteristicArray()
+    {
+        $characteristicList  = "";
+        foreach ($this -> characteristicArray as $item)
+        {
+            $characteristicList .= $item."<br>";
+        }
+        return $characteristicList;
+    }
 }
 
 

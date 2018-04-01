@@ -11,14 +11,20 @@ namespace Order;
 class Order
 {
   private $order_date;
-  private $products = [];
+  private $products;
   private $payment;
+  private $delivery;
+  private $customer;
+  private $shopName;
 
-  public function __construct($order_date,$products=[],$payment)
+  public function __construct($order_date, $products, $payment, $delivery, $customer, $shopName)
   {
-      $this->order_date=date("Y-m-d");
-      $this->products=$products= [];
-      $this->payment=$payment;
+      $this -> order_date = $order_date;
+      $this -> products = $products;
+      $this -> payment = $payment;
+      $this -> delivery = $delivery;
+      $this -> customer = $customer;
+      $this -> shopName = $shopName;
   }
     /**
      * @return array
@@ -44,5 +50,28 @@ class Order
         return $this->payment;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getDelivery()
+    {
+        return $this->delivery;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShopName()
+    {
+        return $this->shopName;
+    }
 
 }

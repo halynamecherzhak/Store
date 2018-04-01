@@ -8,6 +8,8 @@
 namespace  ProductDecorator;
 require_once ("Product.php");
 
+use Product\Product;
+
 class ProductDecorator{
 
     protected $product;
@@ -17,6 +19,7 @@ class ProductDecorator{
         $this->product = $product;
         $this->resetPrice();
     }
+
     //doing this so original object is not altered
     function resetPrice() {
         $this->price = $this->product->getPrice();

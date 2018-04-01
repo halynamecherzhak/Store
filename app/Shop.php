@@ -8,17 +8,37 @@
 
 namespace Shop;
 
+use ShopItem\ShopItem;
+use Product\Product;
+
 class Shop
 {
-    public $amount;
-    public $discount;
-    public $total;
+    private $shopName;
+    private $productArray;
 
-    public function __construct($amount)
+    public function __construct($shopName, $productArray)
     {
-        $this->amount=$amount;
+        $this -> shopName = $shopName;
+        $this -> productArray = $productArray;
     }
-    public function __set($amount,$discount)
+
+    /**
+     * @return mixed
+     */
+    public function getProductArray()
+    {
+        return $this->productArray;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShopName()
+    {
+        return $this->shopName;
+    }
+
+/*    public function __set($amount)
     {
 
         if ($amount < 1) {
@@ -26,26 +46,25 @@ class Shop
         }
         else
         {
-            $this->amount=$amount;
-            $this->discount=$discount;
+            $this -> productArray -> amount=$amount;
         }
-
     }
 
     public function getAmount()
     {
         return $this->amount;
     }
+
     public function getDiscount()
     {
         return $this->discount;
     }
 
-    /*public function showAvailableProducts()
+    public function showAvailableProducts()
     {
         return "Name: ".getType()." Price".getPrice()."UAH"." Category: ".getCategory();
     }
-*/
+
     public function countPrice()
     {
         $total = $this->amount * getPrice();
@@ -57,12 +76,12 @@ class Shop
     {
         if($this->getPrice()>300)
         {
-            $this->discount=0.5;
-            $this->totalPrice()*0.5;
+            $discount = 0.5;
+            $this->totalPrice() * $discount;
         }
         else
         {
             echo "Price isn't enough to get the discount!";
         }
-    }
+    }*/
 }

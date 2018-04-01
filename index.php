@@ -15,7 +15,8 @@ require __DIR__.'/app/Order.php';
 require __DIR__.'/app/Payment.php';
 require __DIR__.'/app/ProductDecorator.php';
 require __DIR__.'/app/Bow.php';
-
+require __DIR__.'/app/Shop.php';
+require __DIR__.'/app/ShopItem.php';
 
 use Characteristic\Characteristic;
 use Product\Product;
@@ -25,18 +26,36 @@ use Order\Order;
 use Payment\Payment;
 use Bow\Bow;
 use ProductDecorator\ProductDecorator;
+use Shop\Shop;
+use ShopItem\ShopItem;
 
 
-$flower=new Product('tulip',15,'plant');
-$flowerPot=new Product('flowerpot',50,'plant');
-$chocolate=new Product('chocolate',30,'sweet');
+$flower = new Product(
+    'tulip',
+    15,
+    'plant');
+$flowerPot = new Product(
+    'flowerpot',
+    50,
+    'plant');
+$chocolate = new Product(
+    'chocolate',
+    30,
+    'sweet');
 
-$customer1=new Customer("Halyna","galya.mech@gmail.com","Doroshenka35");
-$deliver=new Delivery("Lviv","NewPost",50);
-$order=new Order("2018-03-23","tulip,chocolate",100);
-$payment=new Payment();
+$customer = new Customer(
+    "Halyna",
+    "galya.mech@gmail.com",
+    "Medovoi Pechery, 39");
+$delivery = new Delivery(
+    "Lviv",
+    "NewPost",
+    50,
+    "Courier");
+$payment = new Payment("Cash");
 
 //output available products
+/*
 echo "<h2>Available Goods: </h2>";
 echo $flower->showAvailableProducts()."<br>";
 echo $flowerPot->showAvailableProducts()."<br>";
@@ -56,13 +75,56 @@ echo "<h2>Delivery Information</h2>";
 echo "City: ".$deliver->getCity()."<br>"."Post_Type: ".$deliver->getPostType()."<br>"."Delivery_Cost: ".$deliver->getDeliveryCost();
 
 echo"<h2>Order data</h2>";
-echo "Date: ".$order->getOrderDate()."<br>"."Goods: ".$order->getProducts()."<br>"."Payment: ".$order->getPayment()."<br>";
+//echo "Date: ".$order->getOrderDate()."<br>"."Goods: ".$order->getProducts()."<br>"."Payment: ".$order->getPayment()."<br>";
 
-/*echo"Price";
-echo $payment->totalPayment();*/
-echo "Decorator";
-$prod=new Product("rose",20,"plant");
+echo"Price";
+echo $payment->totalPayment();
+*/
 
+$prod = new Product("rose",20,"plant");
+
+$myShop = new Shop("PavloShop", array(
+   new ShopItem($prod,
+       5,
+       new Characteristic(
+           array("Manufacture country: Ukraine",
+                 "Type: flower"))),
+   new ShopItem(
+       new Product("tea", 50, "drink"),
+       10,
+       new Characteristic(
+           array("Manufacture country: India",
+                 "Type; drink"))
+)));
+
+echo "MyShop Products: "."<br>";
+foreach ($myShop -> getProductArray() as $shopItem) {
+    echo $shopItem -> getProduct() -> getType();
+    echo $shopItem -> getProduct() -> getPrice() * $shopItem -> getAmount()."<br>";
+    echo $shopItem ->  getCharacteristic() -> getCharacteristicArray()."<br>";
+}
+
+$order = new Order(
+    date("Y-m-d"),
+    array($myShop -> getProductArray()[1] -> getProduct()),
+    $payment,
+    $delivery,
+    $customer,
+    $myShop->getShopName()
+    );
+
+echo "Order:<br>";
+
+echo $order -> getShopName()."<br>";
+foreach ($order -> getProducts() as $product) {
+    echo $product-> getType()."<br>";
+}
+
+echo $order -> getCustomer() -> getName()."<br>".
+     $order -> getDelivery() -> getPostType()."<br>".
+     $order -> getOrderDate()."<br>";
+
+/*echo "Decorator";
 $decorator = new ProductDecorator($prod);
 $bowDecorator = new Bow($decorator);
 echo'showing price : ';
@@ -71,4 +133,4 @@ echo'showing price with bow : ';
 $bowDecorator->exclaimPrice();
 
 echo $decorator->showPrice();
-
+*/
