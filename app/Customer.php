@@ -13,26 +13,6 @@ class Customer
     private $email;
     private $address;
 
-    /*private static $customer=array(
-        "name"=>"Halyna",
-        "email"=>"galya.mech@gmail.com",
-        "address"=>"Doroshenka35"
-        );
-
-    public static function getCustomer()
-    {
-        return self::$customer;
-    }
-
-    public static function printCustomer()
-    {
-        foreach(self::getCustomer() as $key => $value)
-        {
-            echo "$key = $value <br />";
-        }
-    }
-    */
-
     public function __construct($name,$email,$address)
     {
         $this->name=$name;

@@ -32,7 +32,7 @@ use ShopItem\ShopItem;
 $customer = new Customer(
     "Halyna",
     "galya.mech@gmail.com",
-    "Medovoi Pechery, 39");
+    "Doroshenka, 35");
 $delivery = new Delivery(
     "Lviv",
     "NewPost",

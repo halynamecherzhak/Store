@@ -16,10 +16,9 @@ class Characteristic{
     {
         $this -> characteristicArray = $characteristicArray;
     }
-    /**
-     * @return mixed
-     */
+
     //return characteristicList
+
     public function getCharacteristicArray()
     {
         $characteristicList  = "";
