@@ -19,8 +19,6 @@ class Customer
         "address"=>"Doroshenka35"
         );
 
-
-
     public static function getCustomer()
     {
         return self::$customer;

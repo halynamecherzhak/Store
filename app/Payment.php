@@ -23,6 +23,8 @@ class Payment
     {
         return $this->type_payment;
     }
+
+
 }
 
 

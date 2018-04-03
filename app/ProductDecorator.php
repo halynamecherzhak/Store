@@ -16,16 +16,18 @@ class ProductDecorator{
     protected $price;
 
     public function __construct(Product $product) {
-        $this->product = $product;
-        $this->resetPrice();
+        $this -> product = $product;
+        $this -> resetPrice();
     }
 
-    //doing this so original object is not altered
     function resetPrice() {
-        $this->price = $this->product->getPrice();
+        $this -> price = $this -> product -> getPrice();
     }
-    function showPrice() {
-        return $this->price;
+    function showRozdribnaPrice() {
+        return $this -> price;
     }
 
+    function showOptovaPrice(){
+        return $this -> price * 0.9;
+    }
 }

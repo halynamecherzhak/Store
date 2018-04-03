@@ -19,6 +19,7 @@ class Characteristic{
     /**
      * @return mixed
      */
+    //return characteristicList
     public function getCharacteristicArray()
     {
         $characteristicList  = "";

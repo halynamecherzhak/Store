@@ -14,7 +14,6 @@ require __DIR__.'/app/Delivery.php';
 require __DIR__.'/app/Order.php';
 require __DIR__.'/app/Payment.php';
 require __DIR__.'/app/ProductDecorator.php';
-require __DIR__.'/app/Bow.php';
 require __DIR__.'/app/Shop.php';
 require __DIR__.'/app/ShopItem.php';
 
@@ -24,24 +23,11 @@ use Customer\Customer;
 use Delivery\Delivery;
 use Order\Order;
 use Payment\Payment;
-use Bow\Bow;
 use ProductDecorator\ProductDecorator;
 use Shop\Shop;
 use ShopItem\ShopItem;
 
 
-$flower = new Product(
-    'tulip',
-    15,
-    'plant');
-$flowerPot = new Product(
-    'flowerpot',
-    50,
-    'plant');
-$chocolate = new Product(
-    'chocolate',
-    30,
-    'sweet');
 
 $customer = new Customer(
     "Halyna",
@@ -54,36 +40,14 @@ $delivery = new Delivery(
     "Courier");
 $payment = new Payment("Cash");
 
-//output available products
-/*
-echo "<h2>Available Goods: </h2>";
-echo $flower->showAvailableProducts()."<br>";
-echo $flowerPot->showAvailableProducts()."<br>";
-echo $chocolate->showAvailableProducts();
+$prod = new Product(
+    "rose",
+    20,
+    "plant");
 
-//characteristic of available products
-echo "<h2>Characteristic of Goods</h2>";
-echo Characteristic::printCharacteristic();
+//create Shop which consists of ShopName,Products,Characteristic,ShopAddress
 
-//information about customer
-echo"<h2>Customer Data</h2>";
-//echo Customer::printCustomer();
-echo "Name: ".$customer1->getName()."<br>"."E-mail: ".$customer1->getEmail()."<br>"."Address: ".$customer1->getAddress();
-
-//delivery information
-echo "<h2>Delivery Information</h2>";
-echo "City: ".$deliver->getCity()."<br>"."Post_Type: ".$deliver->getPostType()."<br>"."Delivery_Cost: ".$deliver->getDeliveryCost();
-
-echo"<h2>Order data</h2>";
-//echo "Date: ".$order->getOrderDate()."<br>"."Goods: ".$order->getProducts()."<br>"."Payment: ".$order->getPayment()."<br>";
-
-echo"Price";
-echo $payment->totalPayment();
-*/
-
-$prod = new Product("rose",20,"plant");
-
-$myShop = new Shop("PavloShop", array(
+$myShop = new Shop("GalinaShop", array(
    new ShopItem($prod,
        5,
        new Characteristic(
@@ -94,15 +58,17 @@ $myShop = new Shop("PavloShop", array(
        10,
        new Characteristic(
            array("Manufacture country: India",
-                 "Type; drink"))
-)));
+                 "Type: drink"))
+)),"Doroshenka 35");
 
-echo "MyShop Products: "."<br>";
+echo "<h2>MyShop available products: </h2>"."<br>";
 foreach ($myShop -> getProductArray() as $shopItem) {
-    echo $shopItem -> getProduct() -> getType();
+    echo $shopItem -> getProduct() -> getType()."<br>";
     echo $shopItem -> getProduct() -> getPrice() * $shopItem -> getAmount()."<br>";
     echo $shopItem ->  getCharacteristic() -> getCharacteristicArray()."<br>";
 }
+
+//create Order
 
 $order = new Order(
     date("Y-m-d"),
@@ -113,7 +79,7 @@ $order = new Order(
     $myShop->getShopName()
     );
 
-echo "Order:<br>";
+echo "<h2>Order:</h2>";
 
 echo $order -> getShopName()."<br>";
 foreach ($order -> getProducts() as $product) {
@@ -124,13 +90,19 @@ echo $order -> getCustomer() -> getName()."<br>".
      $order -> getDelivery() -> getPostType()."<br>".
      $order -> getOrderDate()."<br>";
 
-/*echo "Decorator";
-$decorator = new ProductDecorator($prod);
-$bowDecorator = new Bow($decorator);
-echo'showing price : ';
-echo $decorator->showPrice();
-echo'showing price with bow : ';
-$bowDecorator->exclaimPrice();
+echo "<h2>Decorator</h2>";
+$flower = new Product(
+    'tulip',
+    20,
+    'plant');
 
-echo $decorator->showPrice();
-*/
+$decorator = new ProductDecorator($flower);
+
+echo'Showing Rozdribna price of products : ';
+echo $decorator->showRozdribnaPrice()."<br>";
+
+echo'Showing Optova price of products : ';
+echo $decorator->showOptovaPrice()."<br>";
+
+
+

@@ -15,11 +15,15 @@ class Shop
 {
     private $shopName;
     private $productArray;
+    private $shopAddress;
 
-    public function __construct($shopName, $productArray)
+    private  $totlPrice;
+
+    public function __construct($shopName, $productArray, $shopAddress)
     {
         $this -> shopName = $shopName;
         $this -> productArray = $productArray;
+        $this -> shopAddress = $shopAddress;
     }
 
     /**
@@ -38,50 +42,14 @@ class Shop
         return $this->shopName;
     }
 
-/*    public function __set($amount)
+    /**
+     * @return mixed
+     */
+    public function getShopAddress()
     {
-
-        if ($amount < 1) {
-            throw new Exception("Invalid number of flowers");
-        }
-        else
-        {
-            $this -> productArray -> amount=$amount;
-        }
+        return $this->shopAddress;
     }
 
-    public function getAmount()
-    {
-        return $this->amount;
-    }
 
-    public function getDiscount()
-    {
-        return $this->discount;
-    }
 
-    public function showAvailableProducts()
-    {
-        return "Name: ".getType()." Price".getPrice()."UAH"." Category: ".getCategory();
-    }
-
-    public function countPrice()
-    {
-        $total = $this->amount * getPrice();
-        echo "The full price  of is : ";
-        return $total;
-    }
-
-    public function countDiscount()
-    {
-        if($this->getPrice()>300)
-        {
-            $discount = 0.5;
-            $this->totalPrice() * $discount;
-        }
-        else
-        {
-            echo "Price isn't enough to get the discount!";
-        }
-    }*/
 }

@@ -46,10 +46,5 @@ class Product
         $this->category = $category;
     }
 
-    public function showAvailableProducts()
-    {
-        return "Name: ".$this->getType()." Price".$this->getPrice()."UAH"." Category: ".$this->getCategory();
-    }
 
-    //abstract public function getCost();
 }
