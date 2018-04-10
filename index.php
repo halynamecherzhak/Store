@@ -10,35 +10,37 @@ require __DIR__.'/vendor/autoload.php';
 require __DIR__.'/app/Product.php';
 require __DIR__.'/app/Characteristic.php';
 require __DIR__.'/app/Customer.php';
-require __DIR__.'/app/Delivery.php';
 require __DIR__.'/app/Order.php';
-require __DIR__.'/app/Payment.php';
 require __DIR__.'/app/ProductDecorator.php';
 require __DIR__.'/app/Shop.php';
 require __DIR__.'/app/ShopItem.php';
+require __DIR__.'/Payment/CreditCardPayment.php';
+require __DIR__.'/Delivery/NewPost.php';
 
 use Characteristic\Characteristic;
 use Product\Product;
 use Customer\Customer;
-use Delivery\Delivery;
 use Order\Order;
-use Payment\Payment;
 use ProductDecorator\ProductDecorator;
 use Shop\Shop;
 use ShopItem\ShopItem;
+use Payment\CreditCardPayment;
+use Delivery\NewPost;
 
 
+//create customer
 
 $customer = new Customer(
     "Halyna",
     "galya.mech@gmail.com",
     "Doroshenka, 35");
-$delivery = new Delivery(
-    "Lviv",
-    "NewPost",
-    50,
-    "Courier");
-$payment = new Payment("Cash");
+
+$payment = new CreditCardPayment();
+
+$deliveryType = new NewPost();
+$deliveryCost = new NewPost();
+
+//create product
 
 $prod = new Product(
     "rose",
@@ -64,7 +66,9 @@ $myShop = new Shop("GalinaShop", array(
 echo "<h2>MyShop available products: </h2>"."<br>";
 foreach ($myShop -> getProductArray() as $shopItem) {
     echo $shopItem -> getProduct() -> getType()."<br>";
-    echo $shopItem -> getProduct() -> getPrice() * $shopItem -> getAmount()."<br>";
+    //echo $shopItem -> getProduct() -> getPrice() * $shopItem -> getAmount()."<br>";
+    echo $shopItem -> getProduct() -> getPrice()."<br>";
+    echo $shopItem -> getAmount()."<br>";
     echo $shopItem ->  getCharacteristic() -> getCharacteristicArray()."<br>";
 }
 
@@ -74,21 +78,31 @@ $order = new Order(
     date("Y-m-d"),
     array($myShop -> getProductArray()[1] -> getProduct()),
     $payment,
-    $delivery,
+    $deliveryType,
+    $deliveryCost,
     $customer,
     $myShop->getShopName()
     );
 
-echo "<h2>Order:</h2>";
+echo "<h2>Order Information:</h2>";
 
 echo $order -> getShopName()."<br>";
 foreach ($order -> getProducts() as $product) {
-    echo $product-> getType()."<br>";
+    echo $product -> getType()."<br>";
+    echo $product ->getPrice()."<br>";
 }
 
 echo $order -> getCustomer() -> getName()."<br>".
-     $order -> getDelivery() -> getPostType()."<br>".
+     $order -> getCustomer() -> getAddress()."<br>".
+     $order -> getCustomer() -> getEmail()."<br>".
+
+     $order -> getDeliveryType() -> getPostName()."<br>".
+     $order -> getDeliveryCost() -> getCost()."<br>".
      $order -> getOrderDate()."<br>";
+
+echo "<h2>TotalPayment</h2>";
+echo $order -> getDeliveryCost() -> getCost() + $shopItem -> getProduct() -> getPrice();
+
 
 echo "<h2>Decorator</h2>";
 $flower = new Product(

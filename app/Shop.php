@@ -17,8 +17,6 @@ class Shop
     private $productArray;
     private $shopAddress;
 
-    private  $totlPrice;
-
     public function __construct($shopName, $productArray, $shopAddress)
     {
         $this -> shopName = $shopName;

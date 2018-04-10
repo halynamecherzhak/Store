@@ -17,8 +17,6 @@ class ShopItem
     public $amount;
     public $productCharacteristic;
 
-    private $totalprice;
-
     public function __construct($product, $amount, $characteristic)
     {
         $this -> product = $product;
@@ -44,11 +42,5 @@ class ShopItem
     {
         return $this -> productCharacteristic;
     }
-    public function getProductPrice()
-    {
 
-         $this -> totalprice = $this->amount * $this -> product -> getPrice();
-         return $this->totalprice;
-
-     }
 }

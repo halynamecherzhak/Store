@@ -8,23 +8,27 @@
 
 namespace Order;
 
+
 class Order
 {
   private $order_date;
   private $products;
   private $payment;
-  private $delivery;
+  private $deliveryType;
+  private $deliveryCost;
   private $customer;
   private $shopName;
 
-  public function __construct($order_date, $products, $payment, $delivery, $customer, $shopName)
+  public function __construct($order_date, $products, $payment, $deliveryType, $deliveryCost, $customer, $shopName)
   {
       $this -> order_date = $order_date;
       $this -> products = $products;
       $this -> payment = $payment;
-      $this -> delivery = $delivery;
+      $this -> deliveryType = $deliveryType;
+      $this -> deliveryCost = $deliveryCost;
       $this -> customer = $customer;
       $this -> shopName = $shopName;
+
   }
     /**
      * @return array
@@ -53,9 +57,17 @@ class Order
     /**
      * @return mixed
      */
-    public function getDelivery()
+    public function getDeliveryType()
     {
-        return $this->delivery;
+        return $this->deliveryType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDeliveryCost()
+    {
+        return $this->deliveryCost;
     }
 
     /**
